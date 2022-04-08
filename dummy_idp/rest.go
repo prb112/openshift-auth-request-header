@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	"crypto/tls"
@@ -29,7 +29,7 @@ func ChallengeRequest(s Settings, clientId string, codeChallenge string, user st
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				RootCAs: caCertPool,
+				RootCAs:      caCertPool,
 				Certificates: []tls.Certificate{cert},
 			},
 		},
@@ -65,7 +65,7 @@ func ChallengeRequest(s Settings, clientId string, codeChallenge string, user st
 
 	u, _ := response.Location()
 	fmt.Println("Location: ", u)
-	
+
 	for name, values := range response.Header {
 		// Loop over all values for the name.
 		for _, value := range values {
@@ -100,7 +100,7 @@ func WebLoginRequest(s Settings, clientId string, idp string, state string, user
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
-				RootCAs: caCertPool,
+				RootCAs:      caCertPool,
 				Certificates: []tls.Certificate{cert},
 			},
 		},
@@ -109,7 +109,7 @@ func WebLoginRequest(s Settings, clientId string, idp string, state string, user
 		},
 	}
 
-	url := s.Backend + "?client_id=" + clientId + "&idp=" + idp + 
+	url := s.Backend + "?client_id=" + clientId + "&idp=" + idp +
 		"&scope=user:full" + "&state=" + state +
 		"&response_type=code"
 
@@ -138,7 +138,7 @@ func WebLoginRequest(s Settings, clientId string, idp string, state string, user
 	// This is the important bit...
 	loc, _ := response.Location()
 	fmt.Println("Location: ", loc)
-	
+
 	// Very helpful during development confirmation
 	// It should be removed if in production.
 	for name, values := range response.Header {

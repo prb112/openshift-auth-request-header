@@ -1,30 +1,30 @@
-package main 
+package main
 
-import ( 
+import (
 	"encoding/json"
 	"fmt"
+	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
-	"golang.org/x/crypto/bcrypt"
 )
 
-type User struct { 
+type User struct {
 	DisplayName string `json:"display_name"`
-	Email string `json:"email"`
-	Login string `json:"login"`
-	Password string `json:"hashed"`
+	Email       string `json:"email"`
+	Login       string `json:"login"`
+	Password    string `json:"hashed"`
 }
 
-type Settings struct { 
-	Users []User `json:"users"`
-	Cert string `json:"cert"`
-	Key string `json:"key"`
-	CA string `json:"ca"`
+type Settings struct {
+	Users   []User `json:"users"`
+	Cert    string `json:"cert"`
+	Key     string `json:"key"`
+	CA      string `json:"ca"`
 	Backend string `json:"backend"`
 }
 
 // Serializes a Settings to JSON
-func (s Settings) Output() { 
+func (s Settings) Output() {
 	out, err := json.MarshalIndent(s, "", "\t")
 	if err != nil {
 		log.Print(err)
@@ -33,11 +33,11 @@ func (s Settings) Output() {
 }
 
 // Verify the Users Identity
-func (s Settings) Verify(id string, pass string) bool { 
-	if id ==  "" { 
+func (s Settings) Verify(id string, pass string) bool {
+	if id == "" {
 		return false
 	}
-	if pass == "" { 
+	if pass == "" {
 		return false
 	}
 
@@ -50,11 +50,11 @@ func (s Settings) Verify(id string, pass string) bool {
 			return err == nil
 		}
 	}
-	return false	
+	return false
 }
 
 // Load From File grabs the settings and marshals it to a JSON
-func LoadFromFile(fn string) Settings { 
+func LoadFromFile(fn string) Settings {
 	content, err := ioutil.ReadFile(fn)
 	if err != nil {
 		log.Fatal(err)

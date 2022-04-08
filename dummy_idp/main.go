@@ -5,10 +5,10 @@ import (
 	"net/http"
 )
 
-var setting = LoadFromFile("settings/settings.json");
+var setting = LoadFromFile("settings/settings.json")
 
 // Loads the settings and starts up the server on port 8080
-func main() { 
+func main() {
 	// Log out for debugging purposes
 	setting.Output()
 
@@ -31,7 +31,7 @@ func handleChallengeRequest(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(401)
 		return
 	}
-	
+
 	if check := setting.Verify(u, p); !check {
 		fmt.Printf("invalid username or password '%s' '%s'", u, p)
 		w.Header().Set("WWW-Authenticate", `Basic realm="Demo"`)
@@ -39,16 +39,16 @@ func handleChallengeRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for k, v := range r.URL.Query() { 
+	for k, v := range r.URL.Query() {
 		fmt.Println(k, " ", v)
 	}
 
 	// Dump the Query Parameters that were passed in.
 	fmt.Println("Query Parameters:")
-	for k, v := range r.URL.Query() { 
+	for k, v := range r.URL.Query() {
 		fmt.Println(k, " ", v)
 	}
-	
+
 	// Another reason this is dev only (this should be hardened)
 	queryParameters := r.URL.Query()
 	clientId := queryParameters["client_id"][0]
@@ -62,14 +62,14 @@ func handleChallengeRequest(w http.ResponseWriter, r *http.Request) {
 
 // Support for the Web Login Request
 func handleWebLoginRequest(w http.ResponseWriter, r *http.Request) {
-	// Use Basic Auth to login the User (this is a dev-test)	
+	// Use Basic Auth to login the User (this is a dev-test)
 	u, p, ok := r.BasicAuth()
 	if !ok {
 		w.Header().Set("WWW-Authenticate", `Basic realm="Demo"`)
 		w.WriteHeader(401)
 		return
 	}
-	
+
 	if check := setting.Verify(u, p); !check {
 		fmt.Printf("invalid username or password '%s' '%s'", u, p)
 		w.Header().Set("WWW-Authenticate", `Basic realm="Demo"`)
@@ -79,7 +79,7 @@ func handleWebLoginRequest(w http.ResponseWriter, r *http.Request) {
 
 	// Dump the Query Parameters that were passed in.
 	fmt.Println("Query Parameters:")
-	for k, v := range r.URL.Query() { 
+	for k, v := range r.URL.Query() {
 		fmt.Println(k, " ", v)
 	}
 

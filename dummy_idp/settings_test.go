@@ -1,6 +1,6 @@
-package main 
+package main
 
-import ( 
+import (
 	"golang.org/x/crypto/bcrypt"
 	"testing"
 )
@@ -37,34 +37,34 @@ func GenerateExample() Settings {
 func TestBadUser(t *testing.T) {
 	got := DemoSettings.Verify("notreal", "badpass")
 	if got {
-        t.Errorf("BadUser = %t; wanted false", got)
-    }
+		t.Errorf("BadUser = %t; wanted false", got)
+	}
 }
 
 func TestBadPassword(t *testing.T) {
 	got := DemoSettings.Verify("testuser2", "badpass")
 	if got {
-        t.Errorf("BadPassword = %t; wanted false", got)
-    }
+		t.Errorf("BadPassword = %t; wanted false", got)
+	}
 }
 
 func TestBadUserGoodPassword(t *testing.T) {
 	got := DemoSettings.Verify("fred", "password")
 	if got {
-        t.Errorf("BadUserGoodPassword = %t; wanted false", got)
-    }
+		t.Errorf("BadUserGoodPassword = %t; wanted false", got)
+	}
 }
 
 func TestGoodUserGoodPassword1(t *testing.T) {
 	got := DemoSettings.Verify("testuser2", "password")
 	if !got {
-        t.Errorf("GoodUserGoodPassword = %t; wanted true", got)
-    }
+		t.Errorf("GoodUserGoodPassword = %t; wanted true", got)
+	}
 }
 
 func TestGoodUserGoodPassword2(t *testing.T) {
 	got := DemoSettings.Verify("testuser1", "password")
 	if !got {
-        t.Errorf("GoodUserGoodPassword2 = %t; wanted true", got)
-    }
+		t.Errorf("GoodUserGoodPassword2 = %t; wanted true", got)
+	}
 }
