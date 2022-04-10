@@ -64,7 +64,7 @@ sudo vim /etc/hosts
 **output**
 
 ```
-127.0.0.1 console-openshift-console.apps.ocp-test-de8b.111.111.111.111.xip.io oauth-openshift.apps.ocp-test-de8b.111.111.111.111.xip.io api.ocp-test-de8b.158.176.147.42.xip.io
+127.0.0.1 console-openshift-console.apps.ocp-test-de8b.111.111.111.111.xip.io oauth-openshift.apps.ocp-test-de8b.111.111.111.111.xip.io api.ocp-test-de8b.111.111.111.111.xip.io
 ```
 
 5. Login to your bastion server with port forwarding:
