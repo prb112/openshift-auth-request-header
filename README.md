@@ -1,3 +1,5 @@
+Go see https://github.com/prb112/openshift-demo
+
 # **Proof-of-Concept** OpenShift RequestHeader Identity Provider with a Test IdP
 
 **Special credit is given to [Stanislav Láznička](https://github.com/stlaz/openshift-requestheader-config) for the very helpful work and repository.
